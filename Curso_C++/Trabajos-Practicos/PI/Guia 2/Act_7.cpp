@@ -1,3 +1,8 @@
+/*Realizar un algoritmo que almacene información de, como máximo, 500 libros en un arreglo estático. Un libro se
+define como un struct con los siguientes campos: titulo, autor, ISBN, editorial, cantidadHojas. El algoritmo finaliza
+luego de cargar el libro "El hobbit", el cual debe procesarse o cuando ya no quede espacio en el arreglo (lo que
+suceda primero). Finalmente, imprimir el arreglo resultante mostrando todos los datos de cada libro.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -84,15 +89,15 @@ void menu(Biblioteca libros[], int dl) {
 
         switch (opcion)
         {
-        case 1:
+        case '1':
             cargarLibros(libros, dl);
             break;
         
-        case 2:
+        case '2':
             imprimirLibros(libros, dl);
             break;
 
-        case 3:
+        case '3':
             cout << "Saliendo del programa..." << endl;
             break;
 

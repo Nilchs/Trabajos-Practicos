@@ -1,3 +1,13 @@
+/*Realizar un programa que almacene en un arreglo la lista de invitados a una fiesta. El salón donde se realizará,
+tiene capacidad máxima para 150 personas.
+De cada invitado se conoce su nombre, apellido, sexo y edad. Se ingresarán datos hasta que el nombre sea
+igual a “ZZZ” o hasta que la capacidad del salón esté completa.
+Una vez finalizada la carga:
+A. Informar la cantidad de invitados que asistirán a la fiesta.
+B. Realizar una función que liste los nombres de las mujeres cuya edad sea <= 20.
+C. Realizar una función que, dado un apellido y nombre, permita eliminar un invitado en caso de no poder
+asistir.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
