@@ -43,7 +43,7 @@ const int max_Ciudadanos = 500;
 void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
     if (dl >= max_Ciudadanos) // Si el arreglo está lleno, no se puede cargar más ciudadanos.
     {
-        cout << "\nNo hay más espacio para agregar alumnos." << endl;
+        cout << "\nNo hay más espacio para agregar ciudadanos." << endl;
         return;
     }
     for (int  i = dl; i < max_Ciudadanos; i++) {
@@ -55,7 +55,7 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
         cin >> ciudadanos[i].fecha_nacimiento;
         cin.ignore();
         int tipo_doc;
-        cout  << "Ingrese el tipo de documento del ciudadano (1 - DNI-,  2 -Pasaporte-, 3 -Otro-): ";
+        cout  << "Ingrese el tipo de documento del ciudadano (1 - DNI, 2 - Pasaporte, 3 - Otro): ";
         cin >> tipo_doc;
         while  (tipo_doc < 1 || tipo_doc > 3) {
             cout << "\nError, ingrese un tipo de documento valido (1, 2 o 3): "; //  Si el tipo de documento no es válido, solicitarlo nuevamente.
@@ -81,6 +81,10 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
         cout << "\n¿Desea agregar otro ciudadano? (S/N): ";
         char respuesta;
         cin >> respuesta;
+        while (respuesta != 'S' || respuesta != 'N') {
+            cout << "Error, ingrese una respuesta valida (S/N): ";
+            cin >> respuesta;
+        }
         if (respuesta == 'N' || respuesta == 'n') {
             break;
         }
@@ -120,7 +124,7 @@ void  imprimirCiudadanos(Ciudadano ciudadanos[], int dl) {
     }
 }
 
-void filtrar_por_sexo(Ciudadano ciudadanos[], int dl, char sexo) {
+void arregloSexoMasc(Ciudadano ciudadanos[], int dl, char sexo) {
     Ciudadano ciudadanosM[max_Ciudadanos];
     int  dlM = 0;
     for (int i = 0; i < dl; i++)
@@ -130,18 +134,38 @@ void filtrar_por_sexo(Ciudadano ciudadanos[], int dl, char sexo) {
             dlM++;
         }
     }
+    cout << "Arreglo con sexo masculino."; 
     for (int j = 0; j < dlM; j++)
     {
-        //mostramos aca
+        cout << "\nNombre y apellido: " << ciudadanosM[j].nombre << " " << ciudadanosM[j].apellido;
     }
-    
 }
+
+void  arregloSexoFem(Ciudadano ciudadanos[], int dl, char sexo) {
+    Ciudadano ciudadanosF[max_Ciudadanos];
+    int dlF = 0;
+    for (int i = 0; i < dl; i++) {
+        if (ciudadanos[i].sex == sexo) {
+            ciudadanosF[dlF] = ciudadanos[i];
+            dlF++;
+        }
+    }
+    cout << "Arreglo con sexo femenino.";
+    for (int j = 0; j < dlF; j++) {
+        cout << "\nNombre y apellido: " << ciudadanosF[j].nombre << " "  << ciudadanosF[j].apellido;
+    }
+}
+
 
 
 int main () {
     Ciudadano ciudadanos[max_Ciudadanos];
     int dl = 0;
+
     cargaCiudadanos(ciudadanos, dl);
     imprimirCiudadanos(ciudadanos, dl);
+    arregloSexoMasc(ciudadanos, dl, 'M');
+    arregloSexoFem(ciudadanos, dl, 'F');
+
     return 0;
 }
