@@ -20,7 +20,7 @@ struct  Participante {
 void cargarParticipantes(Participante participantes[], int& dl) {
     if (dl >= max_personas) // Si el arreglo está lleno, no se puede cargar más alumnos
     {
-        cout << "\nNo hay más espacio para agregar participantes." << endl;
+        cout << "\nNo hay mas espacio para agregar participantes." << endl;
         return;
     }
     

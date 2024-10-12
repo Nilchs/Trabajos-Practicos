@@ -58,30 +58,30 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
         cout  << "Ingrese el tipo de documento del ciudadano (1 - DNI, 2 - Pasaporte, 3 - Otro): ";
         cin >> tipo_doc;
         while  (tipo_doc < 1 || tipo_doc > 3) {
-            cout << "\nError, ingrese un tipo de documento valido (1, 2 o 3): "; //  Si el tipo de documento no es válido, solicitarlo nuevamente.
+            cout << "Error, ingrese un tipo de documento valido (1, 2 o 3): "; //  Si el tipo de documento no es válido, solicitarlo nuevamente.
             cin >> tipo_doc;
         }
         ciudadanos[i].tipo_documento = tipo_doc; // Guarda el tipo de documento que ingreso el usuario.
         if  (tipo_doc == 1) {
-            cout << "\nIngrese el DNI del ciudadano: ";
+            cout << "Ingrese el DNI del ciudadano: ";
             cin >> ciudadanos[i].documentos.DNI;
         }
         else if  (tipo_doc == 2) {
-            cout << "\nIngrese el Pasaporte del ciudadano: ";
+            cout << "Ingrese el Pasaporte del ciudadano: ";
             getline(cin >> ws, ciudadanos[i].documentos.pasaporte);
         }
         else {
-            cout << "\nIngrese el Otro del ciudadano: ";
+            cout << "Ingrese el Otro del ciudadano: ";
             getline(cin >> ws, ciudadanos[i].documentos.otro);
         }
-        cout << "\nIngrese el sexo del ciudadano (M/F): ";
+        cout << "Ingrese el sexo del ciudadano (M/F): ";
         cin >> ciudadanos[i].sex;
         dl++;
         
-        cout << "\n¿Desea agregar otro ciudadano? (S/N): ";
+        cout << "Desea agregar otro ciudadano? (S/N): ";
         char respuesta;
         cin >> respuesta;
-        while (respuesta != 'S' || respuesta != 'N') {
+        while (respuesta != 'S' && respuesta != 'N') {
             cout << "Error, ingrese una respuesta valida (S/N): ";
             cin >> respuesta;
         }
@@ -92,6 +92,7 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
 }
 
 void  imprimirCiudadanos(Ciudadano ciudadanos[], int dl) {
+    cout << "Lista de Ciudadanos." << endl;
     for (int i = 0; i < dl; i++) {
         int dia, mes, anio;
         dia = ciudadanos[i].fecha_nacimiento % 100; //  Obtiene el dia de la fecha de nacimiento.   
@@ -122,6 +123,7 @@ void  imprimirCiudadanos(Ciudadano ciudadanos[], int dl) {
             cout << "Sexo: " << sexo << endl;
         }
     }
+    cout << endl;
 }
 
 void arregloSexoMasc(Ciudadano ciudadanos[], int dl, char sexo) {
@@ -134,11 +136,12 @@ void arregloSexoMasc(Ciudadano ciudadanos[], int dl, char sexo) {
             dlM++;
         }
     }
-    cout << "Arreglo con sexo masculino."; 
+    cout << "\nArreglo con sexo masculino."; 
     for (int j = 0; j < dlM; j++)
     {
         cout << "\nNombre y apellido: " << ciudadanosM[j].nombre << " " << ciudadanosM[j].apellido;
     }
+    cout << endl;
 }
 
 void  arregloSexoFem(Ciudadano ciudadanos[], int dl, char sexo) {
@@ -150,10 +153,11 @@ void  arregloSexoFem(Ciudadano ciudadanos[], int dl, char sexo) {
             dlF++;
         }
     }
-    cout << "Arreglo con sexo femenino.";
+    cout << "\nArreglo con sexo femenino.";
     for (int j = 0; j < dlF; j++) {
         cout << "\nNombre y apellido: " << ciudadanosF[j].nombre << " "  << ciudadanosF[j].apellido;
     }
+    cout << endl;
 }
 
 
