@@ -23,9 +23,9 @@ código.*/
 using namespace std;
 
 struct Documento {
-        int long DNI;
-        string pasaporte;
-        string  otro;
+    int long DNI;
+    string pasaporte;
+    string otro;
 };
 
 struct Ciudadano {
@@ -51,11 +51,11 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
         getline(cin >> ws, ciudadanos[i].nombre);
         cout  << "Ingrese el apellido del ciudadano: ";
         getline(cin >> ws, ciudadanos[i].apellido);
-        cout  << "Ingrese la fecha de nacimiento del ciudadano (AAAA/MM/DD): ";
+        cout  << "Ingrese la fecha de nacimiento del ciudadano (DD/MM/AAAA): ";
         cin >> ciudadanos[i].fecha_nacimiento;
         cin.ignore();
-        cout  << "Ingrese el tipo de documento del ciudadano (1 - DNI-,  2 -Pasaporte-, 3 -Otro-): ";
         int tipo_doc;
+        cout  << "Ingrese el tipo de documento del ciudadano (1 - DNI-,  2 -Pasaporte-, 3 -Otro-): ";
         cin >> tipo_doc;
         while  (tipo_doc < 1 || tipo_doc > 3) {
             cout << "\nError, ingrese un tipo de documento valido (1, 2 o 3): "; //  Si el tipo de documento no es válido, solicitarlo nuevamente.
@@ -89,28 +89,33 @@ void  cargaCiudadanos(Ciudadano ciudadanos[], int& dl) {
 
 void  imprimirCiudadanos(Ciudadano ciudadanos[], int dl) {
     for (int i = 0; i < dl; i++) {
-        int dia, mes, ano;
+        int dia, mes, anio;
         dia = ciudadanos[i].fecha_nacimiento % 100; //  Obtiene el dia de la fecha de nacimiento.   
         mes = (ciudadanos[i].fecha_nacimiento / 100) % 100; //   Obtiene el mes de la fecha de nacimiento.
-        ano = ciudadanos[i].fecha_nacimiento / 10000; //   Obtiene el año de la fecha de nacimiento.
-        string tipo_documento; //   Variable para mostrar el tipo de documento.
+        anio = ciudadanos[i].fecha_nacimiento / 10000; //   Obtiene el año de la fecha de nacimiento.
         
         cout << "\nNombre y apellido: " << ciudadanos[i].nombre << " " << ciudadanos[i].apellido;
         cout << "\nDireccion: " << ciudadanos[i].direccion;
-        cout << "\nFecha de nacimiento: " << dia << "/" << mes << "/" << ano;
+        cout << "\nFecha de nacimiento: " << dia << "/" << mes << "/" << anio;
+
         if (ciudadanos[i].tipo_documento == 1) {
-            cout  << "\nTipo de documento: DNI";
+            cout  << "\nTipo de documento: DNI" << endl;
+            cout << "Numero de documento: " << ciudadanos[i].documentos.DNI;
         } else if (ciudadanos[i].tipo_documento == 2) {
-            cout  << "\nTipo de documento: Pasaporte";
+            cout  << "\nTipo de documento: Pasaporte" << endl;
+            cout << "Pasaporte del ciudadano: " << ciudadanos[i].documentos.pasaporte;
         } else {
-            cout  << "\nTipo de documento: Otro";
+            cout  << "\nTipo de documento: Otro" << endl;
+            cout << "Contenido de Otro: " << ciudadanos[i].documentos.otro;
         }
-        cout << "Numero de documento: " << ciudadanos[i].documentos.DNI;
+
         string sexo;
-        if (ciudadanos[i].sex == 'M') {
-            sexo = "Masculino";
+        if (ciudadanos[i].sex == 'M' || ciudadanos[i].sex == 'm') {
+            sexo = "masculino";
+            cout << "Sexo: " << sexo << endl;
         } else {
-            sexo = "Femenino";
+            sexo = "femenino";
+            cout << "Sexo: " << sexo << endl;
         }
     }
 }
@@ -134,11 +139,9 @@ void filtrar_por_sexo(Ciudadano ciudadanos[], int dl, char sexo) {
 
 
 int main () {
-    int dl = 0;
     Ciudadano ciudadanos[max_Ciudadanos];
+    int dl = 0;
     cargaCiudadanos(ciudadanos, dl);
-
     imprimirCiudadanos(ciudadanos, dl);
-
     return 0;
 }
