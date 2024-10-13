@@ -36,18 +36,13 @@ int buscarEmpleado(Empleado empleados[], int cantEmpleados, int legajo) {
     return -1; // Retorna -1 si no se encuentra el legajo
 }
 
-void agregarEmpleadoSucursal(Empleado empleados[], Sucursal sucursales[], int &cantEmpleados, int &cantSucursales) {
+void agregarEmpleado(Empleado empleados[], int &cantEmpleados) {
     if (cantEmpleados >= max_elementos) // Si el arreglo está lleno, no se puede cargar más empleados.
     {
         cout << "\nNo hay mas espacio para agregar empleados." << endl;
         return;
     }
-    if (cantSucursales >= max_sucursales)
-    {
-        cout << "\nSucursales cargadas por completo." << endl;
-        return;
-    }
-    
+
     int legajo;
     cout << "Ingrese el legajo del empleado(0 para finalizar): ";
     cin >> legajo;
@@ -61,10 +56,24 @@ void agregarEmpleadoSucursal(Empleado empleados[], Sucursal sucursales[], int &c
         cin.ignore();
         cantEmpleados++;
 
-        cout << "------------" << endl;
-        cout << "Carga de informacion de las sucursales." << endl;
-        cout << "Ingrese el nombre de la sucursal: ";
+        cout << "Ingrese el legajo del siguiente empleado(0 para finalizar): ";
+        cin >> legajo;
+    }
+}
+
+void asignarSucursales(Empleado empleados[], Sucursal sucursales[], int cantEmpleados, int &cantSucursales) {
+    if (cantSucursales >= max_sucursales) {
+        cout << "\nNo hay mas espacio para agregar sucursales." << endl;
+        return;
+    }
+
+    cout << "Asignacion de sucursales:\n";
+    for (int i = 0; i < max_sucursales; i++) {
+        cout << "\nIngrese el nombre de la sucursal (0 para finalizar): ";
         getline(cin >> ws, sucursales[cantSucursales].nombre);
+        if (sucursales[cantSucursales].nombre == "0") {
+            break;
+        }
         cout << "Ingrese el legajo del encargado de la sucursal: ";
         cin >> sucursales[cantSucursales].legajoEncargado;
 
@@ -74,9 +83,6 @@ void agregarEmpleadoSucursal(Empleado empleados[], Sucursal sucursales[], int &c
             cin >> sucursales[cantSucursales].legajoEncargado;
         }
         cantSucursales++;
-        cout << "------------" << endl;
-        cout << "Ingrese el legajo del siguiente empleado(0 para finalizar): ";
-        cin >> legajo;
     }
 }
 
@@ -109,13 +115,13 @@ int main () {
     int cantEmpleados = 0;
     int cantSucursales = 0;
 
-    agregarEmpleadoSucursal(empleados, sucursales, cantEmpleados, cantSucursales);
+    agregarEmpleado(empleados, cantEmpleados);
+    asignarSucursales(empleados, sucursales, cantEmpleados, cantSucursales);
 
     int legajoBuscado;
     cout << "Ingrese el legajo de un empleado para obtener su nombre: ";
     cin >> legajoBuscado;
     informarNombreEmpleado(empleados, cantEmpleados, legajoBuscado);
-
     informarSucursal(sucursales, empleados, cantSucursales, cantEmpleados);
     return 0;
 }
