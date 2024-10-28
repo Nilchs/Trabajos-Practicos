@@ -16,21 +16,63 @@ struct Nodo {
     Nodo *siguiente;
 };
 
+void imprimir_lista(Nodo * inicio) {
+    for (Nodo * aux = inicio;  aux != nullptr; aux = aux->siguiente) {
+        cout << aux->dato << " ";
+    }
+    cout << endl;
+}
+
+void  insertar_inicio(Nodo *& inicio, int dato) {
+    Nodo * nuevo = new Nodo();
+    nuevo->dato = dato;
+    nuevo->siguiente = inicio;
+    inicio = nuevo;
+}
+
+
+void insertar_al_final(Nodo *& inicio, int dato) {
+    Nodo * nuevo = new Nodo();
+    nuevo->dato = dato;
+    nuevo->siguiente = nullptr;
+
+    if  (inicio == nullptr) {
+        inicio = nuevo;
+    }
+    else {
+        Nodo * aux = inicio;
+        while (aux->siguiente != nullptr) {
+            aux = aux->siguiente;
+        }
+        aux->siguiente = nuevo;
+    }
+}
+
 int main () {
     Nodo * inicio = nullptr;
+
     int n;
-    cout << "Ingrese un número(0 para finalizar): ";
+    cout << "Cargar lista al inicio: " << endl;
+    cout << "Ingrese un numero(0 para finalizar): ";
     cin >> n;
     
-    // a).
     while (n != 0) {
-        Nodo * nuevo = new Nodo();
-        nuevo->dato = n;
-        nuevo->siguiente = inicio;
-        inicio = nuevo;
+        insertar_inicio(inicio, n);
         cout << "Ingrese el siguiente numero(0 para finalizar): ";
         cin >> n;
     }
-        
+
+    cout << "Cargar lista al final: " << endl;
+    cout << "Ingrese un numero(0 para finalizar): ";
+    cin >> n;
+
+    while (n != 0) {
+        insertar_al_final(inicio, n);
+        cout << "Ingrese el siguiente numero(0 para finalizar): ";
+        cin >> n;
+    }
+
+    imprimir_lista(inicio);
+
     return 0;
 }
