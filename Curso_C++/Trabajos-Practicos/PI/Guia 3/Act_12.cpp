@@ -21,30 +21,31 @@ struct Nodo {
 };
 
 void insertar_al_final(Nodo *&inicio, Nodo* nuevoNodo) {
-    if  (inicio == nullptr) { // Si la lista esta vacia asigno el inicio a nuevoNodo.
-        inicio = nuevoNodo;
+    if  (inicio == nullptr) {
+        inicio = nuevoNodo; // Si la lista está vacía, el nuevo nodo es el primero.
     }
     else {
-        Nodo * aux = inicio;
+        Nodo * aux = inicio; // Auxiliar para recorrer la lista sin modificar el puntero principal.
         while (aux->siguiente != nullptr) {
             aux = aux->siguiente;
         }
-        aux->siguiente = nuevoNodo;
+        aux->siguiente = nuevoNodo; // El último nodo apunta al nuevo nodo.
     }
 }
 
 
 Nodo* crearNodo(Articulo dato) {
-    Nodo *nuevo = new Nodo();
+    Nodo *nuevo = new Nodo(); // Reservo memoria para un nuevo nodo.
     nuevo->dato = dato;
-    nuevo->siguiente = nullptr;
-    return nuevo;
+    nuevo->siguiente = nullptr; // El siguiente nodo es nulo.
+    return nuevo; // Devuelvo el nuevo nodo.
+
 }
 
 void agregar(Nodo *&lista) {
     int cod;
-    Articulo art;
-    cout << "\nIngrese el código del artículo: ";
+    Articulo art; // Se crea un objeto de tipo Articulo.
+    cout << "\nIngrese el codigo del articulo: ";
     cin >> cod;
 
     while (cod != -1) {
@@ -56,9 +57,9 @@ void agregar(Nodo *&lista) {
         cout << "Ingrese el stock del articulo: ";
         cin >> art.stock;
 
-        Nodo* nuevoArt = crearNodo(art);
-        insertar_al_final(lista, nuevoArt);
-        cout << "\nIngrese el código del artículo: ";
+        Nodo* nuevoArt = crearNodo(art); // Se crea un nuevo nodo con el articulo ingresado.
+        insertar_al_final(lista, nuevoArt); //  Se inserta el nuevo nodo al final de la lista.
+        cout << "\nIngrese el codigo del articulo: ";
         cin >> cod;
     }
 }
