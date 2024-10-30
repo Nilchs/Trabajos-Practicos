@@ -39,7 +39,6 @@ Nodo* crearNodo(Articulo dato) {
     nuevo->dato = dato;
     nuevo->siguiente = nullptr; // El siguiente nodo es nulo.
     return nuevo; // Devuelvo el nuevo nodo.
-
 }
 
 void agregar(Nodo *&lista) {
