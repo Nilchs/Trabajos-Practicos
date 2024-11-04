@@ -70,7 +70,7 @@ void buscarAlumno(Nodo* Lista) {
 
     Nodo* aux = Lista; // Auxiliar para recorrer la lista.
     while (aux->siguiente != nullptr && aux->dato != nombreABuscar) {
-        aux =  aux->siguiente;
+        aux = aux->siguiente;
     }
     if (aux->dato == nombreABuscar) {
         cout << "\nEl nombre se encuentra en la lista." << endl;
