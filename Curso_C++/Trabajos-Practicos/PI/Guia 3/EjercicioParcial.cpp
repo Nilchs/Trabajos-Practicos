@@ -1,3 +1,15 @@
+/*Un comercio multirubros necesita un programa para administrar sus ventas, de cada venta se debe almacenar:
+código de artículo, rubro, nombre del vendedor, fecha de venta (DD/MM), monto cobrado. Realizar un programa
+con todos los módulos necesarios para cumplir con la siguiente funcionalidad:
+a. Permitir al usuario cargar los rubros existenes, en un arreglo estático, teniendo en cuenta que no existen más
+de 15 rubros posibles, pero el usuario podría cargar menos. Definir una condición de corte.
+b. Permitir al usuario cargar las ventas del mes, insertando en una lista enlazada ordenada por rubro.
+Se debe tener en cuenta que, antes de insertar cada venta, se debe validar que el rubro exista (es decir que 
+sea uno de los rubros cargados en el inciso A). Definir un condición de corte.
+c. Informar la cantidad de ventas mayores a $5000.
+d. Pedir al usuario el ingreso de un código de artículo por teclado a buscar en la lista de ventas, e imprimir
+los datos de las ventas correspondientes a ese código.*/
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -79,7 +91,7 @@ void carga_ventas(Nodo*& lista, string rubros[], int dl) {
     }
 }
 
-void lista_ordenada (Nodo*& inicio, Nodo* nuevo) {
+void lista_ordenada(Nodo*& inicio, Nodo* nuevo) {
     if (inicio == nullptr || nuevo->dato.rubro < inicio->dato.rubro) { // Si la lista está vacía o el nuevo nodo tiene un rubro menor que el del nodo actual, lo inserto al inicio.
         nuevo->siguiente = inicio; // El nuevo nodo apunta al nodo actual.
         inicio = nuevo; // El nodo actual es el nuevo nodo.
@@ -94,19 +106,23 @@ void lista_ordenada (Nodo*& inicio, Nodo* nuevo) {
     }
 }
 
-void informar5000(Nodo* lista) {
+void informarVentasMayoresA(Nodo* lista, int maximo) {
     int contador = 0;
-    for(Nodo* aux = lista; aux != nullptr; aux = aux->siguiente) {
-        if(aux->dato.monto_cobrado > 5000) {
+    
+    Nodo* aux = lista;
+    while (aux != nullptr) {
+        if (aux->dato.monto_cobrado >= maximo) {
             contador++;
         }
+        aux = aux->siguiente;
     }
+
     cout << "La cantidad de ventas mayores a $5000 son: " << contador << endl;
 }
 
 void imprimir_ventas(Nodo* lista) {
     int cod;
-    cout << "Ingrese el codigo del artu a buscar: ";
+    cout << "Ingrese el codigo del articulo a buscar: ";
     cin >> cod;
     
     Nodo* aux = lista;
@@ -125,9 +141,13 @@ int main () {
     Nodo* inicio = nullptr;
     int dl = 0;
     string arregloRubro[DF];
+    int max;
 
     cargarRubros(arregloRubro, dl);
     carga_ventas(inicio, arregloRubro, dl);
+    cout << "\nIngrese el valor maximo a buscar por ventas: ";
+    cin >> max;
+    informarVentasMayoresA(inicio, max);
     imprimir_ventas(inicio);
     return 0;
 }
