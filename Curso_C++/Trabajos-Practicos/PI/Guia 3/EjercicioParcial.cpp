@@ -116,7 +116,8 @@ void imprimir_ventas(Nodo* lista) {
             cout << "Fecha de la venta: " << aux->dato.fecha_venta << endl;
             cout << "Monto cobrado: " << aux->dato.monto_cobrado <<  endl;
         }
-        aux = aux->siguiente;
+        aux = aux->siguiente; // Avanzo al siguiente nodo.
+
     }
 }
 
