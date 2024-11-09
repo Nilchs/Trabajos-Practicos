@@ -100,11 +100,15 @@ void agregarAlumnos(Nodo*& lista) {
     }
 }
 
-void informarAprobados(Nodo* lista) {
-    cout << "\nAlumnos aprobados:" << endl;
+void informarAprobados_Porcentaje(Nodo* lista) {
+    int totalAlumnos = 0;
+    int cantidadAprobados = 0;
+    cout << "\nAlumnos aprobados y desaprobados:" << endl;
 
     Nodo* aux = lista;
     while (aux != nullptr) {
+        totalAlumnos++;
+
         if (aux->dato.notas[0] < 7 || aux->dato.notas[1] < 7 || aux->dato.notas[2] < 7)
         {
             cout << "El alumno con legajo: " << aux->dato.legajo << " no fue aprobado ya que se necesita al menos un 7 o mas en las tres materias." << endl;
@@ -115,6 +119,7 @@ void informarAprobados(Nodo* lista) {
             cout << "----------------" << endl;
         }
         else {
+            cantidadAprobados++;
             cout << "El alumno con legajo: " << aux->dato.legajo << " fue aprobado ya que tiene las tres materias aprobadas." << endl;
             cout << "Sus notas son:" << endl;
             cout << "Matematica: " << aux->dato.notas[0] << endl;
@@ -122,22 +127,6 @@ void informarAprobados(Nodo* lista) {
             cout << "Geografia: " << aux->dato.notas[2] << endl;
             cout << "----------------" << endl;
         }
-        aux = aux->siguiente;
-    } 
-}
-
-void porcentajeAprobados(Nodo* lista) {
-    int totalAlumnos = 0;
-    int cantidadAprobados = 0;
-
-    Nodo* aux = lista;
-    while (aux != nullptr) {
-        totalAlumnos++;
-
-        if (aux->dato.notas[0] >= 7 && aux->dato.notas[1] >= 7 && aux->dato.notas[2] >= 7) {
-            cantidadAprobados++;
-        }
-        
         aux = aux->siguiente;
     }
 
@@ -157,11 +146,9 @@ void porcentajeAprobados(Nodo* lista) {
 
 int main () {
     Nodo* inicio = nullptr;
-    Alumno dato;
 
     agregarAlumnos(inicio);
-    informarAprobados(inicio);
-    porcentajeAprobados(inicio);
+    informarAprobados_Porcentaje(inicio);
         
     return 0;
 }
