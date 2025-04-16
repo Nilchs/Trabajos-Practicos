@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -19,20 +20,23 @@ func contarLetrasIterativa(cadena string) (int, int) {
 }
 
 // recursiva
-func contarLetrasRecursiva(cadena string, numVocales, numConsonantes int) (int, int) {
-	if cadena == "" {
+func contarLetrasRecursiva(cadena string, i int, numVocales, numConsonantes int) (int, int) {
+	if i >= len(cadena) {
 		return numVocales, numConsonantes
 	}
-	c := cadena[0]
+	c := cadena[i]
 	if strings.ContainsRune("aeiouAEIOU", rune(c)) { // rune(c) -> convierte el caracter a un rune para que funcione con "ContainsRune".
 		numVocales++
 	} else if c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' {
 		numConsonantes++
 	}
-	return contarLetrasRecursiva(cadena[1:], numVocales, numConsonantes) // "cadena[1:]" -> elimina el primer caracter de la cadena.
+	return contarLetrasRecursiva(cadena, i+1, numVocales, numConsonantes) // "cadena[1:]" -> elimina el primer caracter de la cadena.
 }
 
 func main() {
-	contarLetrasIterativa("hola")
-	contarLetrasRecursiva("hola", 0, 0)
+	S, S2 := "Hola", "Perro"
+	r, r1 := contarLetrasIterativa(S)
+	fmt.Printf("El texto \"%s\" en forma Iterativa, contiene %d vocales y %d consonantes.\n", S, r, r1)
+	r, r1 = contarLetrasRecursiva(S2, 0, 0, 0)
+	fmt.Printf("El texto \"%s\" en forma Recursiva, contiene %d vocales y %d consonantes.\n", S2, r, r1)
 }
