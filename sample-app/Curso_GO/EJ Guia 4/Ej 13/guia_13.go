@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Nodo struct {
 	valor     int
@@ -104,25 +106,48 @@ func buscar(n *Nodo, valor int) bool {
 	}
 }
 
+func minimo(n *Nodo) *Nodo {
+	actual := n
+	for actual.izquierda != nil {
+		actual = actual.izquierda
+	}
+	return actual
+}
+
+func mayor(m *Nodo) *Nodo {
+	actual := m
+	for actual.derecha != nil {
+		actual = actual.derecha
+	}
+	return actual
+}
+
 func main() {
-	arbol := &AVL{nil}
+	var raiz *Nodo
+
 	codigos := []int{
-		9780345391803,
-		9780131103627,
-		9780321573513,
-		9780596009205,
-		9780134190440,
-		9780262033848,
+		1012,
+		1020,
+		1005,
+		1030,
+		1008,
+		1015,
+		1025,
 	}
 
+	// Insertar en AVL
 	for _, codigos := range codigos {
-		arbol.raiz = insertar(arbol.raiz, codigos)
+		raiz = insertar(raiz, codigos)
 	}
 
-	CodigoABuscar := 9780131103627
-	if buscar(arbol.raiz, CodigoABuscar) {
-		fmt.Println("El ISBN esta presente en el arbol")
-	} else {
-		fmt.Println("El ISBN no esta presente en el arbol")
-	}
+	fmt.Println("Códigos insertados en el AVL.")
+
+	// Ejemplo de búsqueda
+	codigoBuscado := 1015
+	encontrado := buscar(raiz, codigoBuscado)
+	fmt.Printf("¿El código %d está en el inventario?: %v\n", codigoBuscado, encontrado)
+
+	// Ejemplo de mínimo y máximo
+	fmt.Println("Código menor:", minimo(raiz).valor)
+	fmt.Println("Código mayor:", mayor(raiz).valor)
 }
